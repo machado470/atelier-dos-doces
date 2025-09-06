@@ -3,858 +3,471 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ateliê dos Doces — Confeitaria Artesanal</title>
-  <meta name="description" content="Doces, salgados e bebidas artesanais com acabamento impecável. Entrega hoje*, personalização e kits para festas. Peça pelo WhatsApp." />
-
-  <!-- Performance: preconnect to fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Ateliê dos Doces — Confeitaria Premium</title>
+  <meta name="description" content="Doces artesanais com acabamento impecável. Bolos, cupcakes e kits de festa sob medida. Peça pelo WhatsApp." />
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
-  <!-- DaisyUI & Flowbite (Tailwind) -->
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-
-  <!-- Open Graph tags -->
-  <meta property="og:title" content="Ateliê dos Doces — Cardápio Artesanal">
-  <meta property="og:description" content="Doces, salgados e bebidas. Peça pelo WhatsApp.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://seu-dominio.com/og.jpg">
-
-  <!-- LocalBusiness schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LocalBusiness",
-    "name":"Ateliê dos Doces",
-    "image":"https://seu-dominio.com/logo.png",
-    "address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressRegion":"SP"},
-    "telephone":"+55-11-99999-9999",
-    "servesCuisine":["Confeitaria","Salgados"],
-    "areaServed":"São Paulo"
-  }
-  </script>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <!-- DaisyUI (Tailwind) -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" rel="stylesheet" />
+  <!-- Flowbite (optional for forms) -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@1.6.3/dist/flowbite.min.css" rel="stylesheet" />
+  <!-- Lucide Icons -->
+  <script type="module" src="https://unpkg.com/lucide@latest/dist/esm/index.js"></script>
   <style>
     :root {
-      /* Paleta de cores inspirada no site Canva */
-      --cocoa: #3B2E2A; /* marrom principal */
-      --rose:  #F2B8C6; /* rosa queimado */
-      --sand:  #EBD9C6; /* areia clara */
-      --milk:  #FFFFFF; /* fundo branco */
-      --muted: #6E6A6A; /* acento neutro */
-      --radius: 1rem;
-      --shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      --cocoa: #3B2E2A;
+      --rose: #F2B8C6;
+      --sand: #EBD9C6;
+      --milk: #FAF7F3;
+      --gray: #6E6A6A;
+      --radius: 1.5rem;
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
-      margin: 0;
       font-family: 'Inter', sans-serif;
+      background-color: #FFFFFF;
       color: var(--cocoa);
-      background: var(--milk);
-      line-height: 1.6;
+      overflow-x: hidden;
     }
     h1, h2, h3, h4 {
       font-family: 'Poppins', sans-serif;
-      margin: 0;
-      line-height: 1.2;
+      font-weight: 600;
     }
-    /* Header fixo */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.95);
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      background: var(--cocoa);
+      color: #FFFFFF;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
       z-index: 1000;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: top 0.3s;
     }
-    header .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
+    .skip-link:focus {
+      top: 1rem;
     }
-    header .logo span {
+    /* Top bar */
+    .topbar {
+      background: var(--milk);
+      font-size: 0.875rem;
+      color: var(--cocoa);
+      padding: 0.25rem 1rem;
+      text-align: center;
+    }
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      backdrop-filter: none;
+      transition: backdrop-filter 0.3s, box-shadow 0.3s;
+    }
+    header.scrolled {
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-bottom: 1px solid #EDEDED;
+    }
+    nav a {
+      color: var(--cocoa);
+      font-weight: 500;
+      margin: 0 0.75rem;
+      transition: color 0.2s;
+    }
+    nav a:hover {
       color: var(--rose);
     }
-    header nav a {
-      margin-left: 1rem;
-      color: var(--cocoa);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    header nav a:hover { text-decoration: underline; }
-
-    /* Mobile navigation */
-    .mobile-toggle {
-      display: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      color: var(--cocoa);
-    }
-    @media (max-width: 768px) {
-      header nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 1rem 2rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        flex-direction: column;
-      }
-      header nav.mobile-open {
-        display: flex;
-      }
-      header nav a {
-        margin: 0.5rem 0;
-      }
-      .mobile-toggle {
-        display: block;
-      }
-    }
-    /* Seções genéricas */
-    section {
-      padding: 4rem 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    /* Hero section */
+    /* Hero */
     .hero {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      min-height: 90vh;
+      padding: 4rem 1rem;
+      text-align: center;
+      background-color: #FFFFFF;
     }
-    .hero-text { flex: 1 1 50%; padding-right: 1rem; }
-    .hero-img  { flex: 1 1 50%; display: flex; justify-content: center; }
-    .hero-img svg { width: 100%; max-width: 400px; height: auto; }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      text-decoration: none;
-      margin-right: 1rem;
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
     }
     .btn-primary {
       background: var(--cocoa);
-      color: #fff;
-    }
-    .btn-primary:hover { background: #2c1f1b; }
-    .btn-secondary {
-      background: var(--rose);
-      color: var(--cocoa);
-    }
-    .btn-secondary:hover { background: #e8a5b6; }
-
-    /* Card layout (legacy, still used for testimonials/delivery) */
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .card {
-      background: #fff;
-      padding: 2rem;
+      color: #FFFFFF;
+      padding: 0.75rem 1.5rem;
       border-radius: var(--radius);
+      transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: var(--shadow);
-      flex: 1 1 calc(33.333% - 1rem);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      background: #2E231F;
+    }
+    .btn-secondary {
+      border: 1px solid #EDEDED;
+      background: #FFFFFF;
+      color: var(--cocoa);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: var(--shadow);
+    }
+    .btn-secondary:hover {
+      background: var(--milk);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    /* Cards generic */
+    .card {
+      background: var(--milk);
+      border: 1px solid #EDEDED;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.1);
     }
-    .card h3 {
-      margin: 0.75rem 0 0.5rem 0;
-      font-size: 1.5rem;
-      font-weight: 700;
+    /* Section headings */
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
     }
-    .card p { margin: 0.5rem 0; color: var(--muted); }
-
-    /* Badge styles */
-    .badge {
-      display: inline-block;
-      border-radius: 9999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.75rem;
-    }
-    .badge-popular { background: var(--rose); color: #fff; }
-    .badge-artesanal { background: var(--sand); color: var(--cocoa); }
-    .badge-gourmet { background: var(--rose); color: #fff; opacity: 0.8; }
-
-    /* Process */
-    .steps { display: flex; flex-wrap: wrap; justify-content: space-between; }
-    .step { flex: 1 1 30%; text-align: center; padding: 1rem; }
-    .step-number {
-      width: 60px;
-      height: 60px;
-      line-height: 60px;
-      border-radius: 50%;
-      background: var(--rose);
-      color: var(--cocoa);
-      margin: 0 auto 1rem auto;
-      font-size: 1.5rem;
-      font-weight: 600;
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--gray);
+      text-align: center;
+      margin-bottom: 2rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
     }
     /* Testimonials */
-    .testimonials { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .testimonial {
-      background: #fff;
-      padding: 2rem;
+    .testimonial-card {
+      background: var(--milk);
+      border: 1px solid #EDEDED;
       border-radius: var(--radius);
+      padding: 1.5rem;
       box-shadow: var(--shadow);
-      flex: 1 1 calc(33.333% - 1rem);
-      border: 1px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .testimonial:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
     }
-    .testimonial p { margin: 0.5rem 0; }
-
-    /* Delivery */
-    .delivery { display: flex; gap: 2rem; flex-wrap: wrap; }
-    .delivery-card {
-      background: #fff;
-      padding: 2rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      flex: 1 1 calc(50% - 1rem);
-      text-align: center;
-      border: 1px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .stars {
+      color: #F4C430; /* golden stars */
+      margin-bottom: 0.5rem;
     }
-    .delivery-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-    }
-
-    /* CTA section */
-    .cta {
-      text-align: center;
-      padding: 4rem 1.5rem;
-      background: #FFFFFF; /* fundo branco para CTA */
-      border-top: 1px solid rgba(0,0,0,0.05);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    @media (max-width: 768px) {
-      .cta .btn {
-        display: block;
-        width: 100%;
-        margin: 0.5rem auto;
-      }
-    }
-
     /* Form */
     form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 700px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--milk);
+      border: 1px solid #EDEDED;
       border-radius: var(--radius);
+      padding: 2rem;
       box-shadow: var(--shadow);
     }
-    form .row { display: flex; gap: 1rem; }
-    form .field { flex: 1 1 50%; display: flex; flex-direction: column; }
-    label { font-weight: 600; margin-bottom: 0.25rem; color: var(--cocoa); }
-    input, select, textarea {
-      padding: 0.75rem;
-      border: 1px solid #ddd;
+    form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #EDEDED;
       border-radius: var(--radius);
-      font-size: 1rem;
+      margin-bottom: 1rem;
+      background: #FFFFFF;
     }
-    textarea { height: 100px; resize: vertical; }
-
-    /* Footer */
-    footer {
-      background: var(--cocoa);
-      color: #fff;
-      padding: 4rem 1.5rem;
-      font-size: 0.9rem;
+    form input:focus, form select:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--rose);
     }
-    footer h3 { margin-bottom: 1rem; }
-    footer h4 { margin: 1rem 0 0.5rem 0; }
-    footer a { color: var(--rose); text-decoration: none; display: block; margin-bottom: 0.25rem; }
-    footer a:hover { text-decoration: underline; }
-    .footer-grid { display: flex; flex-wrap: wrap; gap: 2rem; }
-    .footer-bottom { margin-top: 2rem; }
-
-    /* Social icons in footer */
-    .social-icons {
-      display: flex;
-      gap: 0.5rem;
+    form input:focus, form select:focus, form textarea:focus {
+      box-shadow: 0 0 0 2px rgba(242,184,198,0.3);
     }
-    .social-icons a {
-      width: 2.5rem;
-      height: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      color: var(--rose);
-      transition: background 0.3s, color 0.3s;
-    }
-    .social-icons a:hover {
-      background: var(--rose);
-      color: #fff;
-    }
-    .social-icons span {
-      font-size: 1.25rem;
-    }
-
-    /* Mobile bottom bar styles */
+    /* CTA bar for mobile */
     .mobile-bar {
       position: fixed;
       bottom: 0;
       left: 0;
-      width: 100%;
-      background: var(--cocoa);
+      right: 0;
+      background: var(--milk);
+      border-top: 1px solid #EDEDED;
       display: none;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      z-index: 1000;
-    }
-    .mobile-bar a {
-      flex: 1;
-      text-align: center;
-      color: #fff;
-      font-weight: 600;
-      padding: 0.75rem;
-      text-decoration: none;
-    }
-    .mobile-bar a:first-child {
-      border-right: 1px solid rgba(255,255,255,0.2);
+      z-index: 50;
     }
     @media (max-width: 768px) {
-      .mobile-bar { display: flex; }
+      .mobile-bar {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+      }
     }
-
-    /* Responsivo */
-    @media (max-width: 768px) {
-      .hero { flex-direction: column; text-align: center; }
-      .hero-text, .hero-img { flex: 1 1 100%; }
-      .cards .card, .testimonials .testimonial { flex: 1 1 100%; }
-      .delivery .delivery-card { flex: 1 1 100%; }
-      .steps .step { flex: 1 1 100%; margin-bottom: 2rem; }
-      header nav a { margin-left: 0.5rem; font-size: 0.9rem; }
-    }
-
-    /* Carrossel de categorias */
-    .tab-pane .carousel {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 75%;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 0.5rem 0.25rem 1rem;
-    }
-    @media (min-width: 768px) {
-      .tab-pane .carousel { grid-auto-columns: 33%; }
-    }
-    .tab-pane .carousel .item {
-      scroll-snap-align: start;
-      background:#fff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border:1px solid rgba(0,0,0,.05);
-      padding:1rem;
-      display:flex;
-      flex-direction:column;
-      gap:.5rem;
-    }
-    .tab-pane .carousel .item img{ width:100%; height:180px; object-fit:cover; border-radius: .75rem;}
-    .tab-pane .carousel .item .title{ font-weight:700; font-size:1.1rem;}
-    .tab-pane .carousel .item .meta{ color:var(--muted); font-size:.95rem;}
-    .tab-pane .carousel .item .actions{ margin-top:auto; display:flex; gap:.5rem;}
   </style>
 </head>
 <body>
+  <a href="#encomenda" class="skip-link">Pular para o formulário</a>
+  <!-- Topbar -->
+  <div class="topbar">Abertos hoje • 10h–20h • Cupom <strong>ADOCE10</strong> em kits</div>
   <!-- Header -->
   <header>
-    <div class="logo"><strong>Ateliê</strong> <span>dos Doces</span></div>
-    <div class="mobile-toggle" id="mobile-menu-toggle">☰</div>
-    <nav id="header-nav">
-      <a href="#cardapio">Cardápio</a>
-      <a href="#processo">Processo</a>
-      <a href="#entrega">Entrega</a>
-
-      <a href="#depoimentos">Depoimentos</a>
-      <a href="#contato">Contato</a>
-    </nav>
+    <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-4">
+      <a href="#" class="text-2xl font-bold" style="font-family:'Poppins',sans-serif;">Ateliê</a>
+      <nav class="hidden md:flex items-center">
+        <a href="#cardapio">Cardápio</a>
+        <a href="#kits">Kits</a>
+        <a href="#processo">Processo</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#entrega">Entrega</a>
+        <a href="#encomenda">Encomenda</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <!-- Mobile menu (hamburger) -->
+      <div class="md:hidden">
+        <button id="menu-btn" aria-label="Abrir menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile nav drawer -->
+    <div id="mobile-nav" class="hidden flex flex-col items-center bg-white border-t border-b border-gray-200">
+      <a href="#cardapio" class="py-2">Cardápio</a>
+      <a href="#kits" class="py-2">Kits</a>
+      <a href="#processo" class="py-2">Processo</a>
+      <a href="#depoimentos" class="py-2">Depoimentos</a>
+      <a href="#entrega" class="py-2">Entrega</a>
+      <a href="#encomenda" class="py-2">Encomenda</a>
+      <a href="#contato" class="py-2">Contato</a>
+    </div>
   </header>
-
   <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero-text">
-      <h1 style="font-size:3rem;">Doces artesanais<br>com acabamento <span style="color:var(--rose)">impecável</span></h1>
-      <p style="font-size:1.25rem; margin-top:1rem;">Bolos, cupcakes e kits para festas. Produção sob medida e entrega em áreas selecionadas.</p>
-      <div style="margin-top:2rem;">
-        <a href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda" class="btn btn-primary">Pedir no WhatsApp</a>
-        <a href="#cardapio" class="btn btn-secondary">Ver Cardápio</a>
-      </div>
-      <p style="margin-top:2rem; font-size:0.9rem;">Entrega no mesmo dia para pedidos até 14h — sujeito à disponibilidade.</p>
-    </div>
-    <div class="hero-img">
-      <!-- Ilustração simplificada do bolo -->
-      <svg viewBox="0 0 200 150" aria-hidden="true">
-        <rect x="50" y="70" width="100" height="60" rx="10" fill="var(--rose)"/>
-        <rect x="45" y="60" width="110" height="15" rx="7" fill="var(--cocoa)"/>
-        <rect x="40" y="40" width="120" height="25" rx="12" fill="var(--sand)"/>
-        <circle cx="100" cy="30" r="8" fill="var(--rose)"/>
-        <circle cx="70" cy="35" r="5" fill="var(--rose)"/>
-        <circle cx="130" cy="35" r="5" fill="var(--rose)"/>
-      </svg>
+  <section class="hero">
+    <h1>Doces artesanais com acabamento impecável</h1>
+    <p>Bolos, cupcakes e kits de festa — produção sob medida e entrega ágil.</p>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda" target="_blank" class="btn-primary">Pedir no WhatsApp</a>
+      <a href="#cardapio" class="btn-secondary">Ver Cardápio</a>
     </div>
   </section>
-
-  <!-- Cardápio modular com categorias e carrosséis -->
-  <section id="cardapio" style="padding-top:3rem;">
-    <h2 style="font-size:2.5rem; text-align:center; margin-bottom:0.5rem;">
-      <span style="color:var(--rose)">Cardápio</span>
-    </h2>
-    <p style="text-align:center; max-width:640px; margin:0 auto 1.5rem;">
-      Escolha sua categoria e deslize os itens. Toque num item para ver detalhes e pedir.
-    </p>
-    <div class="w-full max-w-5xl mx-auto">
-      <div class="flex gap-2 justify-center mb-4">
-        <button class="btn btn-secondary" data-tab="doces">Doces</button>
-        <button class="btn" style="background:var(--sand);color:var(--cocoa)" data-tab="salgados">Salgados</button>
-        <button class="btn" style="background:var(--sand);color:var(--cocoa)" data-tab="bebidas">Bebidas</button>
+  <!-- Destaques -->
+  <section id="destaques" class="py-12 px-4">
+    <h2 class="section-title">Destaques</h2>
+    <p class="section-subtitle">Conheça o que torna o Ateliê especial.</p>
+    <div class="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="card text-center">
+        <i data-lucide="clock" class="w-8 h-8 mx-auto mb-2"></i>
+        <h3 class="font-bold text-lg mb-1">Entrega hoje*</h3>
+        <p class="text-sm text-gray-600">Consulte seu CEP para disponibilidade.</p>
       </div>
-      <div id="tab-doces" class="tab-pane"></div>
-      <div id="tab-salgados" class="tab-pane" style="display:none"></div>
-      <div id="tab-bebidas" class="tab-pane" style="display:none"></div>
+      <div class="card text-center">
+        <i data-lucide="palette" class="w-8 h-8 mx-auto mb-2"></i>
+        <h3 class="font-bold text-lg mb-1">Personalização</h3>
+        <p class="text-sm text-gray-600">Tema, cores e mensagens sob medida.</p>
+      </div>
+      <div class="card text-center">
+        <i data-lucide="package" class="w-8 h-8 mx-auto mb-2"></i>
+        <h3 class="font-bold text-lg mb-1">Kits para festas</h3>
+        <p class="text-sm text-gray-600">Economia por volume e opções para todos os tamanhos.</p>
+      </div>
+      <div class="card text-center">
+        <i data-lucide="credit-card" class="w-8 h-8 mx-auto mb-2"></i>
+        <h3 class="font-bold text-lg mb-1">PIX & Cartão</h3>
+        <p class="text-sm text-gray-600">Checkout simples e rápido.</p>
+      </div>
     </div>
   </section>
-
-  <!-- Modal de Produto -->
-  <div id="produto-modal" tabindex="-1" aria-hidden="true"
-    class="hidden fixed inset-0 z-[1001] flex items-center justify-center bg-black/40 p-4">
-    <div class="w-full max-w-lg bg-white rounded-[1rem] p-4 relative">
-      <button data-modal-hide class="absolute right-3 top-3 text-xl">✕</button>
-      <div id="modal-content"><!-- conteúdo preenchido via JS --></div>
+  <!-- Cardápio -->
+  <section id="cardapio" class="py-12 px-4">
+    <h2 class="section-title">Cardápio</h2>
+    <p class="section-subtitle">Escolha entre nossos doces artesanais.</p>
+    <div class="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="card">
+        <h3 class="font-bold text-xl mb-1">Bolo caseiro 1kg</h3>
+        <p class="text-sm text-gray-600 mb-2">Massa fofinha com cobertura ao seu gosto.</p>
+        <p class="font-bold mb-4">a partir de R$ 49</p>
+        <button class="btn-secondary w-full">Adicionar / Detalhes</button>
+      </div>
+      <div class="card">
+        <h3 class="font-bold text-xl mb-1">Cupcakes</h3>
+        <p class="text-sm text-gray-600 mb-2">Sabores variados, perfeitos para presentes.</p>
+        <p class="font-bold mb-4">a partir de R$ 6</p>
+        <button class="btn-secondary w-full">Adicionar / Detalhes</button>
+      </div>
+      <div class="card">
+        <h3 class="font-bold text-xl mb-1">Brigadeiros (cx 12)</h3>
+        <p class="text-sm text-gray-600 mb-2">Tradicionais e gourmet com coberturas especiais.</p>
+        <p class="font-bold mb-4">a partir de R$ 28</p>
+        <button class="btn-secondary w-full">Adicionar / Detalhes</button>
+      </div>
     </div>
-  </div>
-
+  </section>
+  <!-- Kits -->
+  <section id="kits" class="py-12 px-4 bg-[#FAF7F3]">
+    <h2 class="section-title">Kits Especiais</h2>
+    <p class="section-subtitle">Pacotes pensados para adoçar suas comemorações.</p>
+    <div class="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="card relative">
+        <span class="absolute top-3 right-3 bg-rose-300 text-rose-900 text-xs font-semibold px-2 py-1 rounded-full">Mais vendido</span>
+        <h3 class="font-bold text-xl mb-1">Kit Festa Pequena</h3>
+        <p class="text-sm text-gray-600 mb-2">Bolo 1kg, 12 cupcakes e 24 brigadeiros.</p>
+        <p class="font-bold mb-4">R$ 179</p>
+        <button class="btn-secondary w-full">Adicionar / Detalhes</button>
+      </div>
+      <div class="card">
+        <h3 class="font-bold text-xl mb-1">Kit Presente</h3>
+        <p class="text-sm text-gray-600 mb-2">Surpreenda alguém especial.</p>
+        <p class="font-bold mb-4">R$ 69</p>
+        <button class="btn-secondary w-full">Adicionar / Detalhes</button>
+      </div>
+      <div class="card">
+        <h3 class="font-bold text-xl mb-1">Caixa Degustação</h3>
+        <p class="text-sm text-gray-600 mb-2">Variedade de doces para provar nossos sabores.</p>
+        <p class="font-bold mb-4">R$ 59</p>
+        <button class="btn-secondary w-full">Adicionar / Detalhes</button>
+      </div>
+    </div>
+  </section>
   <!-- Processo -->
-  <section id="processo">
-    <h2 style="font-size:2.5rem; text-align:center; margin-bottom:2rem;"><span style="color:var(--rose)">Como Funciona</span></h2>
-    <p style="text-align:center; max-width:600px; margin:0 auto 3rem auto;">Processo simples e transparente para sua encomenda perfeita</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <div style="font-size:2rem; margin:0.5rem 0;">🛒</div>
-        <h3>Escolha</h3>
-        <p>Navegue pelo nosso cardápio completo e selecione seus doces favoritos. Personalize conforme seu gosto e ocasião.</p>
+  <section id="processo" class="py-12 px-4">
+    <h2 class="section-title">Como Funciona</h2>
+    <p class="section-subtitle">Encomendar é simples e rápido.</p>
+    <div class="max-w-4xl mx-auto grid gap-6 sm:grid-cols-3">
+      <div class="card text-center">
+        <i data-lucide="clipboard-list" class="w-8 h-8 mx-auto mb-2"></i>
+        <h3 class="font-bold mb-1">Escolha</h3>
+        <p class="text-sm text-gray-600">Selecione seus doces ou kits favoritos.</p>
       </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <div style="font-size:2rem; margin:0.5rem 0;">📅</div>
-        <h3>Agende</h3>
-        <p>Faça seu pedido pelo WhatsApp ou formulário com pelo menos 24h de antecedência. Confirme todos os detalhes.</p>
+      <div class="card text-center">
+        <i data-lucide="calendar-check" class="w-8 h-8 mx-auto mb-2"></i>
+        <h3 class="font-bold mb-1">Agende</h3>
+        <p class="text-sm text-gray-600">Defina data de entrega ou retirada.</p>
       </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <div style="font-size:2rem; margin:0.5rem 0;">🎁</div>
-        <h3>Receba</h3>
-        <p>Retire no ateliê ou receba em casa no horário combinado. Seus doces chegam fresquinhos e prontos para saborear.</p>
+      <div class="card text-center">
+        <i data-lucide="truck" class="w-8 h-8 mx-auto mb-2"></i>
+        <h3 class="font-bold mb-1">Receba</h3>
+        <p class="text-sm text-gray-600">Nossa equipe entrega fresquinho ou aguarda sua visita.</p>
       </div>
     </div>
   </section>
-
   <!-- Depoimentos -->
-  <section id="depoimentos">
-    <h2 style="font-size:2.5rem; text-align:center; margin-bottom:2rem;"><span style="color:var(--rose)">O que dizem nossos clientes</span></h2>
-    <p style="text-align:center; max-width:600px; margin:0 auto 3rem auto;">Histórias reais de momentos especiais adoçados por nossos produtos</p>
-    <div class="testimonials">
-      <div class="testimonial">
-        <p style="color:var(--rose); font-size:1.25rem;">★★★★★</p>
-        <p>"Os cupcakes mais deliciosos que já provei! Perfeitos para a festa da minha filha. Todos os convidados elogiaram."</p>
-        <p><strong>Marina S.</strong> — Cliente há 2 anos</p>
+  <section id="depoimentos" class="py-12 px-4 bg-[#FAF7F3]">
+    <h2 class="section-title">Depoimentos</h2>
+    <p class="section-subtitle">O que nossos clientes dizem.</p>
+    <div class="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Os melhores doces que já provei! Atendimento impecável e entrega rápida."</p>
+        <p class="text-sm text-gray-600 mt-2">— Maria</p>
       </div>
-      <div class="testimonial">
-        <p style="color:var(--rose); font-size:1.25rem;">★★★★★</p>
-        <p>"Bolo lindo e saboroso, entrega pontual. Super recomendo o Ateliê dos Doces! Qualidade excepcional."</p>
-        <p><strong>Carlos M.</strong> — Cliente há 1 ano</p>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Personalizaram nosso bolo de casamento exatamente como queríamos. Ficou lindo e delicioso!"</p>
+        <p class="text-sm text-gray-600 mt-2">— João e Ana</p>
       </div>
-      <div class="testimonial">
-        <p style="color:var(--rose); font-size:1.25rem;">★★★★★</p>
-        <p>"Brigadeiros incríveis! Qualidade artesanal que faz toda a diferença. Sempre peço para eventos especiais."</p>
-        <p><strong>Ana L.</strong> — Cliente há 3 anos</p>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Kit degustação perfeito para experimentar vários sabores. Recomendo!"</p>
+        <p class="text-sm text-gray-600 mt-2">— Lucas</p>
       </div>
     </div>
   </section>
-
   <!-- Entrega & Retirada -->
-  <section id="entrega">
-    <h2 style="font-size:2.5rem; text-align:center; margin-bottom:2rem;"><span style="color:var(--rose)">Entrega & Retirada</span></h2>
-    <div class="delivery">
-      <div class="delivery-card">
-        <div style="font-size:2rem; margin-bottom:0.5rem;">⏰</div>
-        <h3>Horários</h3>
-        <p><strong>Segunda a Sábado</strong><br>10h às 20h</p>
-        <p>Domingo: Apenas retiradas agendadas</p>
+  <section id="entrega" class="py-12 px-4">
+    <h2 class="section-title">Entrega & Retirada</h2>
+    <p class="section-subtitle">Informações sobre horários e áreas atendidas.</p>
+    <div class="max-w-4xl mx-auto grid gap-6 sm:grid-cols-2">
+      <div class="card">
+        <h3 class="font-bold text-lg mb-1">Horários</h3>
+        <p class="text-sm text-gray-600">Seg–Sáb: 10h–20h</p>
+        <p class="text-sm text-gray-600 mb-2">Domingo: retiradas agendadas</p>
       </div>
-      <div class="delivery-card">
-        <div style="font-size:2rem; margin-bottom:0.5rem;">🚚</div>
-        <h3>Entrega</h3>
-        <p><strong>Áreas selecionadas</strong><br>Frete calculado por distância</p>
-        <p>Entrega no mesmo dia para pedidos até 14h*</p>
-        <p style="font-size:0.8rem; font-style:italic;">*Sujeito à disponibilidade</p>
+      <div class="card">
+        <h3 class="font-bold text-lg mb-1">Entrega</h3>
+        <p class="text-sm text-gray-600">Áreas selecionadas; frete por distância.</p>
+        <p class="text-sm text-gray-600">Pedidos até 14h: entrega no mesmo dia (sujeito à disponibilidade).</p>
       </div>
     </div>
   </section>
-
-  <!-- CTA pré-rodapé -->
-  <section class="cta">
-    <h2 style="font-size:2.5rem; margin-bottom:1rem;">Pronto para adoçar seu dia?</h2>
-    <p style="max-width:600px; margin:0 auto 2rem auto;">Faça seu pedido agora e experimente nossos doces artesanais feitos com muito carinho</p>
-    <div>
-      <a href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda" class="btn btn-primary">Pedir no WhatsApp</a>
-      <a href="#contato" class="btn btn-secondary">Formulário de encomenda</a>
+  <!-- CTA Pre-Rodapé -->
+  <section class="py-12 px-4 bg-[#FAF7F3]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-2xl font-bold mb-4">Pronto para adoçar seu dia?</h2>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda" target="_blank" class="btn-primary">Pedir no WhatsApp</a>
+        <a href="#encomenda" class="btn-secondary">Encomendar</a>
+      </div>
     </div>
   </section>
-
-  <!-- Formulário de Encomenda -->
-  <section id="contato">
-    <h2 style="font-size:2.5rem; text-align:center; margin-bottom:2rem;"><span style="color:var(--rose)">Formulário de Encomenda</span></h2>
-    <p style="text-align:center; margin:0 auto 3rem auto;">Preencha os detalhes do seu pedido e entraremos em contato</p>
+  <!-- Encomenda -->
+  <section id="encomenda" class="py-12 px-4">
+    <h2 class="section-title">Faça sua Encomenda</h2>
+    <p class="section-subtitle">Preencha o formulário e abriremos o WhatsApp com seu pedido.</p>
     <form id="order-form">
-      <div class="row">
-        <div class="field">
-          <label for="nome">Nome Completo *</label>
-          <input type="text" id="nome" required>
-        </div>
-        <div class="field">
-          <label for="whats">WhatsApp *</label>
-          <input type="tel" id="whats" placeholder="(11) 99999-9999" required>
-        </div>
+      <label for="nome">Nome*</label>
+      <input type="text" id="nome" required />
+      <label for="whatsapp">WhatsApp*</label>
+      <input type="tel" id="whatsapp" required />
+      <label for="email">E-mail</label>
+      <input type="email" id="email" />
+      <label for="tipo">Tipo*</label>
+      <select id="tipo" required>
+        <option value="">Selecione</option>
+        <option>Bolo</option>
+        <option>Cupcakes</option>
+        <option>Docinhos</option>
+        <option>Kit</option>
+        <option>Personalizado</option>
+      </select>
+      <label for="quantidade">Quantidade/Tamanho</label>
+      <input type="text" id="quantidade" />
+      <label for="data">Data*</label>
+      <input type="date" id="data" required />
+      <label for="sabores">Sabores/Recheios</label>
+      <textarea id="sabores" rows="2"></textarea>
+      <label for="logistica">Entrega/Retirada*</label>
+      <select id="logistica" required>
+        <option value="">Selecione</option>
+        <option>Entrega</option>
+        <option>Retirada</option>
+      </select>
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" />
+      <label for="endereco">Endereço</label>
+      <textarea id="endereco" rows="2"></textarea>
+      <label for="tema">Tema/Mensagem</label>
+      <textarea id="tema" rows="2"></textarea>
+      <label for="referencia">Referência (link)</label>
+      <input type="url" id="referencia" />
+      <label for="pagamento">Pagamento</label>
+      <select id="pagamento">
+        <option value="">Selecione</option>
+        <option>PIX</option>
+        <option>Cartão</option>
+        <option>Na entrega</option>
+      </select>
+      <label class="flex items-center mb-4">
+        <input type="checkbox" id="lgpd" required class="mr-2" />
+        <span>Autorizo contato e processamento das informações</span>
+      </label>
+      <div class="text-center">
+        <button type="submit" class="btn-primary">Abrir no WhatsApp</button>
       </div>
-      <div class="field">
-        <label for="email">E-mail</label>
-        <input type="email" id="email">
-      </div>
-      <div class="row">
-        <div class="field">
-          <label for="produto">Tipo de Produto *</label>
-          <select id="produto" required>
-            <option value="">Selecione o produto...</option>
-            <option value="bolo">Bolo Caseiro</option>
-            <option value="cupcakes">Cupcakes</option>
-            <option value="brigadeiros">Brigadeiros</option>
-            <option value="coxinha">Coxinha</option>
-            <option value="quiche">Quiche</option>
-            <option value="empadas">Empadas</option>
-            <option value="refrigerante">Refrigerante Lata</option>
-            <option value="agua">Água</option>
-            <option value="suco">Suco Natural</option>
-            <option value="kit-festa">Kit Festa Pequena</option>
-            <option value="kit-presente">Kit Presente</option>
-            <option value="degustacao">Caixa Degustação</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="quantidade">Quantidade/Tamanho</label>
-          <input type="text" id="quantidade" placeholder="Ex: 1kg, 12 unidades, 2 kits">
-        </div>
-      </div>
-      <div class="field">
-        <label for="data">Data de Entrega/Retirada *</label>
-        <input type="date" id="data" required>
-      </div>
-      <div class="field">
-        <label for="sabores">Sabores Desejados</label>
-        <textarea id="sabores" placeholder="Descreva os sabores que gostaria (chocolate, morango, baunilha, etc.)"></textarea>
-      </div>
-      <div class="field">
-        <label for="entrega-retirada">Entrega ou Retirada *</label>
-        <select id="entrega-retirada" required>
-          <option value="">Selecione uma opção...</option>
-          <option value="retirada">Retirada no ateliê (gratuita)</option>
-          <option value="entrega">Entrega (frete a calcular)</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="tema">Tema/Decoração/Mensagem</label>
-        <textarea id="tema" placeholder="Descreva o tema, cores preferidas, mensagem personalizada, ocasião especial..."></textarea>
-      </div>
-      <div class="field">
-        <label for="referencia">Referência Visual (link)</label>
-        <input type="url" id="referencia" placeholder="https://... (link de imagem de referência)">
-      </div>
-      <div class="field">
-        <label for="pagamento">Forma de Pagamento Preferida</label>
-        <select id="pagamento">
-          <option value="">Selecione uma opção...</option>
-          <option value="pix">PIX (desconto de 5%)</option>
-          <option value="cartao">Cartão de Crédito/Débito</option>
-          <option value="dinheiro">Dinheiro na entrega/retirada</option>
-        </select>
-      </div>
-      <div class="field">
-        <label><input type="checkbox" id="lgpd" required> Concordo com o tratamento dos meus dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD) e autorizo o contato via WhatsApp e e-mail para finalização e acompanhamento do pedido. *</label>
-      </div>
-      <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1rem;">Enviar Encomenda</button>
     </form>
   </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-grid">
-      <div>
-        <h3><span style="color:var(--rose)">Ateliê</span> dos Doces</h3>
-        <p>Confeitaria artesanal dedicada a criar momentos especiais através de doces únicos, feitos com ingredientes selecionados e muito amor.</p>
-        <div class="social-icons" style="margin-top:1rem;">
-          <a href="#" aria-label="Twitter"><span>🐦</span></a>
-          <a href="#" aria-label="Pinterest"><span>📌</span></a>
-          <a href="#" aria-label="Instagram"><span>📸</span></a>
-        </div>
-      </div>
-      <div>
-        <h4>Links Rápidos</h4>
-        <a href="#cardapio">Cardápio</a>
-        <a href="#processo">Como Funciona</a>
-        <a href="#contato">Fazer Encomenda</a>
-        <a href="#depoimentos">Depoimentos</a>
-      </div>
-      <div>
-        <h4>Informações</h4>
-        <p>📍 São Paulo - SP</p>
-        <p>🕒 Seg a Sáb: 10h às 20h</p>
-        <p>📱 WhatsApp: (11) 99999-9999</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 Ateliê dos Doces. Todos os direitos reservados.</p>
-      <p style="font-size:0.8rem;">Feito com 💖 para adoçar seus momentos especiais</p>
-    </div>
-  </footer>
-
-  <!-- Script para enviar encomenda via WhatsApp e menu móvel -->
-  <script>
-    document.getElementById('order-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nome    = document.getElementById('nome').value;
-      const whats   = document.getElementById('whats').value;
-      const email   = document.getElementById('email').value;
-      const produto = document.getElementById('produto').value;
-      const quantidade = document.getElementById('quantidade').value;
-      const data    = document.getElementById('data').value;
-      const sabores = document.getElementById('sabores').value;
-      const entrega = document.getElementById('entrega-retirada').value;
-      const tema    = document.getElementById('tema').value;
-      const referencia = document.getElementById('referencia').value;
-      const pagamento = document.getElementById('pagamento').value;
-
-      let message = '*Nova encomenda Ateliê dos Doces*%0A';
-      message += 'Nome: ' + nome + '%0A';
-      message += 'WhatsApp: ' + whats + '%0A';
-      if (email) message += 'E-mail: ' + email + '%0A';
-      message += 'Produto: ' + produto + '%0A';
-      if (quantidade) message += 'Quantidade/Tamanho: ' + quantidade + '%0A';
-      message += 'Data: ' + data + '%0A';
-      if (sabores) message += 'Sabores: ' + sabores + '%0A';
-      message += 'Entrega/Retirada: ' + entrega + '%0A';
-      if (tema) message += 'Tema/Mensagem: ' + tema + '%0A';
-      if (referencia) message += 'Referência: ' + referencia + '%0A';
-      if (pagamento) message += 'Pagamento: ' + pagamento + '%0A';
-      const url = 'https://wa.me/554792405689?text=' + message;
-      window.open(url, '_blank');
-    });
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
-      const nav = document.getElementById('header-nav');
-      nav.classList.toggle('mobile-open');
-    });
-  </script>
-
-  <!-- Script para módulos de cardápio e modal -->
-  <script>
-  const WHATS_BASE = 'https://wa.me/554792405689?text=';
-
-  const PRODUCTS = {
-    doces: [
-      { id:'bolo-1kg', title:'Bolo Caseiro 1kg', price:49, img:'https://picsum.photos/seed/bolo/640/400',
-        desc:'Massa fofinha, recheio cremoso e cobertura caprichada.', tags:['Popular','Artesanal'] },
-      { id:'brigadeiro-gourmet', title:'Brigadeiro (cx 12)', price:28, img:'https://picsum.photos/seed/brigadeiro/640/400',
-        desc:'Tradicionais e gourmet com coberturas especiais.', tags:['Gourmet'] },
-      { id:'cupcake', title:'Cupcakes', price:6, unit:true, img:'https://picsum.photos/seed/cupcake/640/400',
-        desc:'Sabores variados e decoração personalizada.' }
-    ],
-    salgados: [
-      { id:'coxinha-25', title:'Coxinha (25 un)', price:39, img:'https://picsum.photos/seed/coxinha/640/400',
-        desc:'Massa leve, frango temperado e crocância perfeita.' },
-      { id:'quiche', title:'Quiche Individual', price:12, unit:true, img:'https://picsum.photos/seed/quiche/640/400',
-        desc:'Clássica com queijo e alho-poró.' },
-      { id:'empada-12', title:'Empadas (12 un)', price:35, img:'https://picsum.photos/seed/empada/640/400',
-        desc:'Massa amanteigada e recheios variados.' }
-    ],
-    bebidas: [
-      { id:'coca-lata', title:'Refrigerante Lata', price:6, unit:true, img:'https://picsum.photos/seed/refri/640/400',
-        desc:'Geladinha pra acompanhar.', size:'350ml' },
-      { id:'agua', title:'Água', price:4, unit:true, img:'https://picsum.photos/seed/agua/640/400',
-        desc:'Sem gás', size:'500ml' },
-      { id:'suco', title:'Suco Natural', price:10, unit:true, img:'https://picsum.photos/seed/suco/640/400',
-        desc:'Laranja espremida na hora.', size:'300ml' }
-    ]
-  };
-
-  function buildWhats(p){
-    const msg = encodeURIComponent('Olá! Quero pedir: ' + p.title + ' (' + p.id + '). Qual a disponibilidade para hoje?');
-    return WHATS_BASE + msg;
-  }
-
-  // Render carrossel de uma categoria
-  function renderCategory(cat){
-    const el = document.getElementById('tab-' + cat);
-    el.innerHTML = '<div class="carousel">' + PRODUCTS[cat].map(p => {
-      return `<div class="item">
-        <img src="${p.img}" alt="${p.title}">
-        <div class="title">${p.title}</div>
-        <div class="meta">${p.desc}</div>
-        <div style="font-weight:700">a partir de R$ ${p.price}${p.unit?',00/unid':''}</div>
-        <div class="actions">
-          <a class="btn btn-secondary" href="#" onclick="openProduct('${cat}','${p.id}'); return false;">Ver detalhes</a>
-          <a class="btn btn-primary" href="${buildWhats(p)}" target="_blank">Pedir</a>
-        </div>
-      </div>`;
-    }).join('') + '</div>';
-  }
-
-  // Botão Abas
-  document.querySelectorAll('[data-tab]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const tab = btn.getAttribute('data-tab');
-      ['doces','salgados','bebidas'].forEach(c=>{
-        document.getElementById('tab-' + c).style.display = (c===tab)?'block':'none';
-      });
-      document.querySelectorAll('[data-tab]').forEach(b=>{
-        b.classList.remove('btn-secondary');
-        b.style.background = 'var(--sand)';
-        b.style.color = 'var(--cocoa)';
-      });
-      btn.classList.add('btn-secondary');
-      btn.style.background = 'var(--rose)';
-      btn.style.color = 'var(--cocoa)';
-      history.replaceState(null,'','#categoria='+tab);
-    });
-  });
-
-  // Modal functions
-  const modal = document.getElementById('produto-modal');
-  modal.querySelector('[data-modal-hide]').addEventListener('click', ()=> closeModal());
-
-  function openProduct(cat, id){
-    const p = PRODUCTS[cat].find(x=>x.id === id);
-    const combos = suggestCombos(cat, id);
-    document.getElementById('modal-content').innerHTML = `
-      <div class="flex gap-4">
-        <img src="${p.img}" alt="${p.title}" style="width:160px;height:160px;object-fit:cover;border-radius:.75rem">
-        <div>
-          <h3 style="font-size:1.5rem;font-weight:700">${p.title}</h3>
-          <p style="color:var(--muted)">${p.desc}</p>
-          <div style="margin:.5rem 0;font-weight:700">a partir de R$ ${p.price}${p.unit?',00/unid':''}</div>
-          <div class="flex gap-2">
-            <a class="btn btn-primary" href="${buildWhats(p)}" target="_blank">Pedir no WhatsApp</a>
-            <a class="btn" style="background:var(--sand);color:var(--cocoa)" href="#" onclick="addAndOpenCombo('${cat}','${id}');return false;">Adicionar combo</a>
-          </div>
-        </div>
-      </div>
-      ${combos.length ? `
-      <div style="margin-top:1rem">
-        <div style="font-weight:700;margin-bottom:.25rem">Combina com</div>
-        <div class="carousel">
-          ${combos.map(c=>`
-            <div class="item">
-              <img src="${c.img}" alt="${c.title}">
-              <div class="title">${c.title}</div>
-              <div class="actions">
-                <a class="btn btn-secondary" href="#" onclick="openProduct('${c.cat}','${c.id}');return false;">Ver</a>
-                <a class="btn btn-primary" href="${buildWhats(c)}" target="_blank">Pedir</a>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-      </div>` : '' }
-    `;
-    modal.classList.remove('hidden');
-    document.body.style.overflow='hidden';
-    history.replaceState(null,'','#produto='+p.id);
-  }
-
-  function closeModal(){
-    modal.classList.add('hidden');
-    document.body.style.overflow='';
-    const url = new URL(location.href);
-    url.hash = url.hash.startsWith('#produto=') ? '' : url.hash;
-    history.replaceState(null,'',url.pathname + url.search + url.hash);
-  }
-
-  function suggestCombos(cat,id){
-    // simples: sempre oferecer bebidas; se for bebida, oferecer doces
-    if(cat !== 'bebidas') return PRODUCTS.bebidas.slice(0,2).map(x=>({...x, cat:'bebidas'}));
-    return PRODUCTS.doces.slice(0,2).map(x=>({...x, cat:'doces'}));
-  }
-
-  function addAndOpenCombo(cat,id){
-    const base = PRODUCTS[cat].find(x=>x.id === id);
-    const extra = suggestCombos(cat,id)[0];
-    const msg = encodeURIComponent(`Quero 1x ${base.title} + 1x ${extra.title}. Pode enviar o valor?`);
-    window.open(WHATS_BASE + msg,'_blank');
-  }
-
-  // Inicialização
-  ['doces','salgados','bebidas'].forEach(renderCategory);
-  const defaultTab = (location.hash.match(/categoria=(\w+)/)||[])[1] || 'doces';
-  document.querySelector(`[data-tab="${defaultTab}"]`).click();
-  const deep = (location.hash.match(/produto=([\w-]+)/)||[])[1];
-  if(deep){
-    const found = Object.entries(PRODUCTS).find(([cat, arr]) => arr.some(p=>p.id===deep));
-    if(found){ openProduct(found[0], deep); }
-  }
-
-  // Botão flutuante WhatsApp
-  const fab = document.createElement('a');
-  fab.href = WHATS_BASE + encodeURIComponent('Olá! Quero fazer um pedido.');
-  fab.target = '_blank';
-  fab.setAttribute('aria-label','WhatsApp');
-  fab.style.cssText = `
-    position:fixed; right:1rem; bottom:1rem; z-index:1002;
-    background:var(--cocoa); color:#fff; border-radius:9999px;
-    padding:.9rem 1.1rem; box-shadow:var(--shadow); font-weight:700;
-  `;
-  fab.textContent = 'WhatsApp';
-  document.body.appendChild(fab);
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/motion/dist/motion.umd.min.js"></script>
-
-  <!-- Mobile bottom bar for quick actions -->
-  <div class="mobile-bar">
-    <a href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda">WhatsApp</a>
-    <a href="#contato">Encomendar</a>
-  </div>
-</body>
-</html>
