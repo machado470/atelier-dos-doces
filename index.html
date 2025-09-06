@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ateliê dos Doces — Confeitaria Artesanal</title>
+  <meta name="description" content="Doces artesanais com acabamento impecável. Entrega hoje*, personalização e kits para festas. Peça pelo WhatsApp." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --cocoa:#3B2E2A; /* principal */
+      --rose:#F2B8C6;  /* destaque rosa queimado */
+      --sand:#EBD9C6;  /* areia */
+      --milk:#FAF7F3;  /* fundo leitoso */
+      --ink:#1F1B16;   /* texto escuro */
+      --muted:#6E6A6A; /* acento */
+      --radius-2xl: 1.25rem; /* ~20px */
+      --shadow-soft: 0 8px 24px rgba(59,46,42,.12);
+      --shadow-hover: 0 12px 32px rgba(59,46,42,.18);
+      --maxw: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:var(--milk); color:var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6;
+    }
+
+    /* Skip link */
+    .skip-link{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip-link:focus{position:fixed; left:1rem; top:1rem; width:auto; height:auto; padding:.5rem .75rem; background:#fff; color:var(--cocoa); border-radius:.5rem; box-shadow:var(--shadow-soft); z-index:9999}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:1000; backdrop-filter: none; transition:all .3s ease;
+      background: linear-gradient(180deg, rgba(250,247,243,.85), rgba(250,247,243,.65));
+      border-bottom:1px solid rgba(59,46,42,.06);
+    }
+    header.scrolled{backdrop-filter: blur(10px); background: rgba(250,247,243,.75)}
+    .nav{max-width:var(--maxw); margin:auto; padding:.75rem 1rem; display:flex; align-items:center; gap:1rem}
+    .brand{font-family:Poppins, sans-serif; font-weight:700; letter-spacing:.5px; font-size:1.25rem; color:var(--cocoa); display:flex; align-items:center; gap:.5rem}
+    .brand .dot{width:.55rem; height:.55rem; background:var(--rose); border-radius:999px; display:inline-block}
+    .spacer{flex:1}
+
+    .menu{display:flex; gap:.75rem; flex-wrap:wrap}
+    .menu a{padding:.5rem .65rem; border-radius:.65rem; text-decoration:none; color:var(--ink); font-weight:600; font-size:.95rem}
+    .menu a:hover,.menu a:focus{background:rgba(59,46,42,.06)}
+
+    /* Buttons */
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.15rem; border:none; border-radius:var(--radius-2xl); font-weight:700; cursor:pointer; text-decoration:none; transition:transform .18s ease, box-shadow .18s ease; box-shadow:var(--shadow-soft)}
+    .btn:hover{transform:translateY(-2px); box-shadow:var(--shadow-hover)}
+    .btn:focus-visible{outline:3px solid var(--rose); outline-offset:2px}
+
+    .btn-primary{background:linear-gradient(135deg, var(--cocoa), #5a3f38); color:#fff}
+    .btn-secondary{background:linear-gradient(135deg, var(--sand), var(--rose)); color:#3b2e2a}
+
+    /* Containers & sections */
+    .container{max-width:var(--maxw); margin:auto; padding: clamp(1rem, 3vw, 2rem)}
+    section{padding: clamp(2rem, 6vw, 5rem) 0}
+    .section-title{font-family:Poppins, sans-serif; color:var(--cocoa); font-size:clamp(1.5rem, 2.6vw, 2rem); margin:0 0 1.25rem}
+    .section-sub{color:var(--muted); margin-top:-.5rem}
+
+    /* Hero */
+    .hero{position:relative; background: radial-gradient(1200px 500px at 10% -20%, rgba(242,184,198,.35), transparent 60%), radial-gradient(800px 500px at 120% 20%, rgba(235,217,198,.35), transparent 60%), linear-gradient(180deg, rgba(250,247,243,1), rgba(250,247,243,.8));}
+    .hero-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:2rem; align-items:center}
+    .hero h1{font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(2rem, 4.5vw, 3.2rem); color:var(--cocoa); margin:.25rem 0}
+    .hero p{color:var(--muted); font-size:1.05rem}
+    .hero .cta{display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.25rem}
+    .hero-art{
+      background: conic-gradient(from 180deg at 50% 50%, rgba(242,184,198,.25), rgba(235,217,198,.25), rgba(242,184,198,.25));
+      border-radius: var(--radius-2xl); padding:2rem; box-shadow:var(--shadow-soft);
+    }
+    .mock{aspect-ratio: 4/3; border-radius: var(--radius-2xl); background: repeating-linear-gradient(45deg, #fff, #fff 14px, rgba(242,184,198,.25) 14px, rgba(242,184,198,.25) 28px); display:grid; place-items:center; color:var(--muted); font-weight:600}
+
+    /* Grid helpers */
+    .grid{display:grid; gap:1rem}
+    .cols-3{grid-template-columns: repeat(3, 1fr)}
+    .cols-4{grid-template-columns: repeat(4, 1fr)}
+    .cols-2{grid-template-columns: repeat(2, 1fr)}
+    @media (max-width: 900px){
+      .hero-inner{grid-template-columns:1fr}
+      .cols-4{grid-template-columns: repeat(2, 1fr)}
+      .cols-3{grid-template-columns: repeat(1, 1fr)}
+      .cols-2{grid-template-columns: 1fr}
+    }
+
+    /* Cards */
+    .card{background:#fff; border-radius:var(--radius-2xl); box-shadow:var(--shadow-soft); padding:1.1rem 1.1rem; transition:transform .18s ease, box-shadow .18s ease}
+    .card:hover{transform:translateY(-4px); box-shadow:var(--shadow-hover)}
+    .icon{font-size:1.4rem; width:2.25rem; height:2.25rem; display:grid; place-items:center; border-radius:.75rem; background:linear-gradient(135deg, var(--sand), var(--rose)); color:#3b2e2a; font-weight:700}
+    .card h3{margin:.5rem 0; font-family:Poppins, sans-serif; color:var(--cocoa); font-size:1.05rem}
+    .price{font-weight:800; color:var(--cocoa)}
+
+    /* Process steps */
+    .step{display:flex; gap:.85rem; align-items:flex-start}
+    .badge{width:2rem; height:2rem; border-radius:999px; display:grid; place-items:center; background:var(--cocoa); color:#fff; font-weight:800}
+
+    /* Testimonials */
+    .stars{color:#E3A1B5}
+    .quote{color:var(--muted)}
+
+    /* Entrega */
+    .note{font-size:.95rem; color:var(--muted)}
+
+    /* CTA strip */
+    .cta-strip{background: linear-gradient(90deg, var(--cocoa), #5a3f38); color:#fff; border-radius: var(--radius-2xl); padding:1.25rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; box-shadow:var(--shadow-soft)}
+    .cta-strip p{margin:0; font-weight:600}
+
+    /* Form */
+    form{display:grid; gap:1rem}
+    .frm-grid{display:grid; gap:1rem; grid-template-columns:repeat(12,1fr)}
+    .col-6{grid-column: span 6}
+    .col-4{grid-column: span 4}
+    .col-8{grid-column: span 8}
+    .col-12{grid-column: 1 / -1}
+    @media (max-width: 900px){ .col-6,.col-4,.col-8{grid-column: 1 / -1} }
+
+    label{font-weight:600; color:var(--cocoa)}
+    input, select, textarea{
+      width:100%; padding:.85rem .95rem; border-radius:1rem; border:1px solid rgba(59,46,42,.15); background:#fff; color:var(--ink);
+      box-shadow:0 1px 0 rgba(59,46,42,.04) inset;
+    }
+    input:focus, select:focus, textarea:focus{outline:3px solid var(--rose); border-color:transparent}
+
+    .legal{font-size:.9rem; color:var(--muted)}
+
+    /* Footer */
+    footer{padding:2rem 0 5rem; color:var(--muted)}
+
+    /* Fixed mobile bar */
+    .mobile-cta{position:fixed; left:0; right:0; bottom:0; z-index:999; background: rgba(250,247,243,.88); backdrop-filter: blur(8px); border-top:1px solid rgba(59,46,42,.08); display:none}
+    .mobile-cta .wrap{max-width:var(--maxw); margin:auto; padding:.6rem 1rem; display:flex; gap:.5rem}
+    .mobile-cta a{flex:1; text-align:center}
+    @media (max-width: 900px){ .mobile-cta{display:block} }
+
+    /* Reveal animations */
+    .reveal{opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.visible{opacity:1; transform: none}
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1; transform:none}
+      .btn, .card{transition:none}
+    }
+
+    /* Accessibility helpers */
+    .visually-hidden{position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#formulario">Pular para o formulário</a>
+
+  <!-- Header -->
+  <header id="topo" aria-label="Cabeçalho do site">
+    <nav class="nav" aria-label="Navegação primária">
+      <span class="brand" aria-label="Logo tipográfico">
+        <span class="dot" aria-hidden="true"></span>
+        Ateliê
+      </span>
+      <div class="spacer"></div>
+      <div class="menu" role="menubar">
+        <a role="menuitem" href="#cardapio">Cardápio</a>
+        <a role="menuitem" href="#kits">Kits</a>
+        <a role="menuitem" href="#processo">Processo</a>
+        <a role="menuitem" href="#depoimentos">Depoimentos</a>
+        <a role="menuitem" href="#entrega">Entrega</a>
+        <a role="menuitem" href="#contato">Contato</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Apresentação">
+    <div class="container hero-inner">
+      <div class="reveal">
+        <h1>Doces artesanais com acabamento impecável</h1>
+        <p>Receitas autorais, ingredientes selecionados e um acabamento que faz qualquer mesa de festa parecer editorial de revista.</p>
+        <div class="cta">
+          <a class="btn btn-primary" id="whatsHero" href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda" aria-label="Abrir WhatsApp para conversar">💬 WhatsApp</a>
+          <a class="btn btn-secondary" href="#cardapio" aria-label="Ver Cardápio">📜 Ver Cardápio</a>
+        </div>
+        <p class="note" aria-live="polite">Entrega no mesmo dia para pedidos até 14h — sujeito à disponibilidade.</p>
+      </div>
+      <div class="hero-art reveal" aria-hidden="true">
+        <div class="mock">🧁 Mockup/Ilustrações de doces</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destaques -->
+  <section aria-label="Destaques">
+    <div class="container">
+      <h2 class="section-title">Destaques</h2>
+      <div class="grid cols-4">
+        <article class="card reveal" aria-label="Entrega hoje">
+          <div class="icon" aria-hidden="true">⚡</div>
+          <h3>Entrega hoje*</h3>
+          <p class="note">Pedidos até 14h — sujeito à disponibilidade.</p>
+        </article>
+        <article class="card reveal" aria-label="Personalização">
+          <div class="icon" aria-hidden="true">✨</div>
+          <h3>Personalização</h3>
+          <p>Temas, cores e mensagens sob medida.</p>
+        </article>
+        <article class="card reveal" aria-label="Kits para festas">
+          <div class="icon" aria-hidden="true">🎁</div>
+          <h3>Kits para festas</h3>
+          <p>Combinações prontas para facilitar seu evento.</p>
+        </article>
+        <article class="card reveal" aria-label="PIX e Cartão">
+          <div class="icon" aria-hidden="true">💳</div>
+          <h3>PIX e Cartão</h3>
+          <p>Pagamento sem atrito, do seu jeito.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cardápio -->
+  <section id="cardapio" aria-label="Cardápio">
+    <div class="container">
+      <h2 class="section-title">Cardápio</h2>
+      <div class="grid cols-3">
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">🍰</div>
+          <h3>Bolo caseiro 1kg</h3>
+          <p><span class="price">a partir de R$49</span></p>
+          <p class="quote">Sabores clássicos com cobertura lisa impecável.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">🧁</div>
+          <h3>Cupcakes</h3>
+          <p><span class="price">a partir de R$6</span></p>
+          <p class="quote">Massa úmida, swirl perfeito, toppers sob medida.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon" aria-hidden="true">🍫</div>
+          <h3>Brigadeiros (cx 12)</h3>
+          <p><span class="price">a partir de R$28</span></p>
+          <p class="quote">Clássicos, gourmet e granulados elegantes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kits -->
+  <section id="kits" aria-label="Kits para festas">
+    <div class="container">
+      <h2 class="section-title">Kits</h2>
+      <p class="section-sub">Seleções pensadas para facilitar: bolo + cupcakes + brigadeiros em combinações inteligentes.</p>
+      <div class="grid cols-3">
+        <article class="card reveal">
+          <h3>Kit Essencial</h3>
+          <p>1 bolo 1kg + 12 brigadeiros.</p>
+        </article>
+        <article class="card reveal">
+          <h3>Kit Festa</h3>
+          <p>1 bolo 1,5kg + 12 cupcakes + 24 brigadeiros.</p>
+        </article>
+        <article class="card reveal">
+          <h3>Kit Premium</h3>
+          <p>2 bolos 1kg + 24 cupcakes + 36 brigadeiros.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Processo -->
+  <section id="processo" aria-label="Como funciona">
+    <div class="container">
+      <h2 class="section-title">Processo em 3 passos</h2>
+      <div class="grid cols-3">
+        <div class="card step reveal">
+          <span class="badge" aria-hidden="true">1</span>
+          <div>
+            <h3>Escolha</h3>
+            <p>Selecione itens do cardápio ou um kit.</p>
+          </div>
+        </div>
+        <div class="card step reveal">
+          <span class="badge" aria-hidden="true">2</span>
+          <div>
+            <h3>Agende</h3>
+            <p>Informe a data e preferências.</p>
+          </div>
+        </div>
+        <div class="card step reveal">
+          <span class="badge" aria-hidden="true">3</span>
+          <div>
+            <h3>Receba</h3>
+            <p>Entrega no horário combinado ou retirada.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos" aria-label="Depoimentos de clientes">
+    <div class="container">
+      <h2 class="section-title">Depoimentos</h2>
+      <div class="grid cols-3">
+        <article class="card reveal">
+          <div class="stars" aria-label="5 de 5">★★★★★</div>
+          <p class="quote">“Acabamento perfeito e sabor inesquecível.”</p>
+          <p>— Marina F.</p>
+        </article>
+        <article class="card reveal">
+          <div class="stars" aria-label="5 de 5">★★★★★</div>
+          <p class="quote">“Entregaram no mesmo dia, salvou minha surpresa!”</p>
+          <p>— Rodrigo S.</p>
+        </article>
+        <article class="card reveal">
+          <div class="stars" aria-label="5 de 5">★★★★★</div>
+          <p class="quote">“Personalização fiel ao tema. Lindo na mesa.”</p>
+          <p>— Camila A.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Entrega & Retirada -->
+  <section id="entrega" aria-label="Entrega e Retirada">
+    <div class="container">
+      <h2 class="section-title">Entrega & Retirada</h2>
+      <div class="grid cols-2">
+        <article class="card reveal" aria-label="Entrega">
+          <h3>Entrega</h3>
+          <p>Seg–Sáb, 10h–20h • Área: raio 15km</p>
+          <p class="note">Entrega no mesmo dia para pedidos até 14h — sujeito à disponibilidade.</p>
+        </article>
+        <article class="card reveal" aria-label="Retirada">
+          <h3>Retirada</h3>
+          <p>Seg–Sáb, 10h–18h • Bairro Central</p>
+          <p class="note">Traga seu código de pedido para agilizar.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA pré-rodapé -->
+  <section aria-label="Solicitar orçamento">
+    <div class="container">
+      <div class="cta-strip reveal">
+        <p>Pronto para encomendar? Fale no WhatsApp ou preencha o formulário.</p>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap">
+          <a class="btn btn-secondary" id="whatsCTA" href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda">💬 WhatsApp</a>
+          <a class="btn btn-primary" href="#formulario">✍️ Abrir formulário</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulário -->
+  <section id="contato" aria-label="Contato e encomendas">
+    <div class="container">
+      <h2 class="section-title" id="formulario">Formulário de Encomenda</h2>
+      <form id="orderForm" novalidate>
+        <div class="frm-grid">
+          <div class="col-6">
+            <label for="nome">Nome*</label>
+            <input id="nome" name="Nome" placeholder="Seu nome" required />
+          </div>
+          <div class="col-6">
+            <label for="whatsapp">WhatsApp*</label>
+            <input id="whatsapp" name="WhatsApp" placeholder="(DDD) 9 9999-9999" required />
+          </div>
+
+          <div class="col-6">
+            <label for="email">E-mail</label>
+            <input id="email" name="E-mail" type="email" placeholder="voce@exemplo.com" />
+          </div>
+          <div class="col-6">
+            <label for="tipo">Tipo*</label>
+            <select id="tipo" name="Tipo" required>
+              <option value="">Selecione</option>
+              <option>Bolo</option>
+              <option>Cupcakes</option>
+              <option>Brigadeiros</option>
+              <option>Kit</option>
+              <option>Outro</option>
+            </select>
+          </div>
+
+          <div class="col-4">
+            <label for="quantidade">Quantidade/Tamanho*</label>
+            <input id="quantidade" name="Quantidade/Tamanho" placeholder="Ex: 1kg, 12un" required />
+          </div>
+          <div class="col-4">
+            <label for="data">Data*</label>
+            <input id="data" name="Data" type="date" required />
+          </div>
+          <div class="col-4">
+            <label for="pagamento">Pagamento*</label>
+            <select id="pagamento" name="Pagamento" required>
+              <option value="">Selecione</option>
+              <option>PIX</option>
+              <option>Cartão</option>
+              <option>Dinheiro</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="sabores">Sabores</label>
+            <input id="sabores" name="Sabores" placeholder="Ex: chocolate, ninho com morango" />
+          </div>
+
+          <div class="col-6">
+            <label for="modalidade">Entrega/Retirada*</label>
+            <select id="modalidade" name="Entrega/Retirada" required>
+              <option value="">Selecione</option>
+              <option>Entrega</option>
+              <option>Retirada</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label for="cep">CEP</label>
+            <input id="cep" name="CEP" placeholder="00000-000" />
+          </div>
+
+          <div class="col-12">
+            <label for="endereco">Endereço</label>
+            <input id="endereco" name="Endereço" placeholder="Rua, número, complemento" />
+          </div>
+
+          <div class="col-12">
+            <label for="tema">Tema/Mensagem</label>
+            <textarea id="tema" name="Tema/Mensagem" rows="3" placeholder="Descreva o tema, cores, mensagem no topo etc."></textarea>
+          </div>
+
+          <div class="col-12">
+            <label for="referencia">Referência (link)</label>
+            <input id="referencia" name="Referência" type="url" placeholder="https://..." />
+          </div>
+
+          <div class="col-12">
+            <label class="legal">
+              <input type="checkbox" id="lgpd" required /> Concordo com o uso dos meus dados para contato e orçamento (LGPD).
+            </label>
+          </div>
+
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">📦 Enviar Encomenda</button>
+          </div>
+        </div>
+      </form>
+      <p class="note" style="margin-top:.75rem">*Entrega no mesmo dia para pedidos até 14h — sujeito à disponibilidade.</p>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer aria-label="Rodapé">
+    <div class="container">
+      <div class="grid cols-3">
+        <div>
+          <h3 class="section-title" style="font-size:1.1rem">Ateliê dos Doces</h3>
+          <p>Confeitaria artesanal • acabamento impecável.</p>
+        </div>
+        <div>
+          <h3 class="section-title" style="font-size:1.1rem">Links rápidos</h3>
+          <p><a href="#cardapio">Cardápio</a> • <a href="#kits">Kits</a> • <a href="#processo">Processo</a> • <a href="#depoimentos">Depoimentos</a> • <a href="#entrega">Entrega</a> • <a href="#contato">Contato</a></p>
+        </div>
+        <div>
+          <h3 class="section-title" style="font-size:1.1rem">Políticas & contato</h3>
+          <p><a href="#">Política de privacidade</a> • <a href="#">Termos</a> • <a id="whatsFooter" href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda">WhatsApp</a></p>
+        </div>
+      </div>
+      <p class="note">© <span id="year"></span> Ateliê dos Doces. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile bottom bar -->
+  <div class="mobile-cta" role="region" aria-label="Ações rápidas no mobile">
+    <div class="wrap">
+      <a class="btn btn-primary" id="whatsMobile" href="https://wa.me/554792405689?text=Ol%C3%A1%2C%20quero%20fazer%20uma%20encomenda">💬 WhatsApp</a>
+      <a class="btn btn-secondary" href="#formulario">✍️ Encomendar</a>
+    </div>
+  </div>
+
+  <script>
+    // ===== CONFIGURE SEU NÚMERO AQUI =====
+    // Substitua por seu número real no formato DDI + DDD + número, sem símbolos
+    const WHATS_NUMBER = '554792405689';
+    // =====================================
+
+        function buildMessageFromForm(form){
+      const data = new FormData(form);
+      const entries = [];
+      for(const [k,v] of data.entries()){
+        if(v && k !== 'lgpd') entries.push(`${k}: ${v}`);
+      }
+      const header = 'Olá! Gostaria de fazer uma encomenda no *Ateliê dos Doces*:';
+      return `${header}\n\n${entries.join('\n')}`;
+    }
+
+    function openWhatsWithText(text){
+      const url = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    // Anexar número aos botões rápidos (abre conversa vazia)
+        // Form: validação simples e envio para WhatsApp
+    const form = document.getElementById('orderForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(!form.reportValidity()) return;
+      if(!document.getElementById('lgpd').checked){
+        alert('É necessário aceitar a LGPD para prosseguir.');
+        return;
+      }
+      const msg = buildMessageFromForm(form);
+      openWhatsWithText(msg);
+    });
+
+    // Header blur on scroll
+    const header = document.querySelector('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 6);
+    document.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      for(const ent of entries){
+        if(ent.isIntersecting){ ent.target.classList.add('visible'); io.unobserve(ent.target); }
+      }
+    }, {threshold: .12});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
