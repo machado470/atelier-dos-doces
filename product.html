@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ateliê dos Doces — Produto</title>
+  <meta name="description" content="Detalhes do produto e combos do Ateliê dos Doces." />
+
+  <!-- Preconnect e fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- DaisyUI & Flowbite (Tailwind) -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+
+  <!-- Estilos customizados -->
+  <style>
+    :root {
+      /* Reutilizamos a mesma paleta de cores do index */
+      --cocoa: #3B2E2A;
+      --rose:  #F2B8C6;
+      --sand:  #EBD9C6;
+      --milk:  #FFFFFF;
+      --muted: #6E6A6A;
+      --radius: 1rem;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--cocoa);
+      background: var(--milk);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      line-height: 1.2;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.95);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    header .logo span { color: var(--rose); }
+    header nav a {
+      margin-left: 1rem;
+      color: var(--cocoa);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    header nav a:hover { text-decoration: underline; }
+
+    /* Conteúdo do produto */
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 5rem 1.5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product-img {
+      flex: 1 1 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+    }
+    .product-img img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--radius);
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+    .product-info {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-info h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-info p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .price {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--cocoa); color: #fff; }
+    .btn-primary:hover { background: #2c1f1b; }
+    .btn-secondary { background: var(--rose); color: var(--cocoa); }
+    .btn-secondary:hover { background: #e8a5b6; }
+    .btn-back {
+      margin-left: 0;
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--cocoa);
+    }
+    .btn-back:hover { text-decoration: underline; }
+
+    /* Combos sugeridos */
+    .combos {
+      margin-top: 3rem;
+      padding: 0 1.5rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .combos h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .carousel {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 75%;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1rem;
+    }
+    @media (min-width: 768px) {
+      .carousel { grid-auto-columns: 33%; }
+    }
+    .carousel .item {
+      scroll-snap-align: start;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.05);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .carousel .item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+    }
+    .carousel .item .title { font-weight: 700; font-size: 1.1rem; }
+    .carousel .item .actions { margin-top: auto; display: flex; gap: 0.5rem; }
+
+    /* WhatsApp flutuante */
+    .fab {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 1002;
+      background: var(--cocoa);
+      color: #fff;
+      border-radius: 9999px;
+      padding: 0.9rem 1.1rem;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+    }
+    .fab:hover { background: #2c1f1b; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Ateliê <span>dos Doces</span></div>
+    <nav>
+      <a href="index.html#cardápio">Cardápio</a>
+      <a href="index.html#processo">Processo</a>
+      <a href="index.html#entrega">Entrega</a>
+      <a href="index.html#depoimentos">Depoimentos</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="product-container">
+      <div class="product-img">
+        <img id="product-img" src="" alt="" />
+      </div>
+      <div class="product-info">
+        <h2 id="product-title">Produto</h2>
+        <p id="product-desc">Descrição do produto.</p>
+        <div class="price" id="product-price">R$ --</div>
+        <div class="actions">
+          <a id="product-order" href="#" class="btn btn-primary" target="_blank">Pedir no WhatsApp</a>
+          <a id="add-combo" href="#" class="btn btn-secondary">Adicionar combo</a>
+        </div>
+        <a href="index.html#cardápio" class="btn-back">
+          <i data-lucide="arrow-left" aria-hidden="true"></i>
+          Voltar ao cardápio
+        </a>
+      </div>
+    </div>
+
+    <div class="combos" id="combos-section" style="display:none">
+      <h3>Combina com</h3>
+      <div class="carousel" id="combos-carousel"></div>
+    </div>
+  </main>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a href="#" id="fab" class="fab" target="_blank">WhatsApp</a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/motion/dist/motion.umd.min.js"></script>
+  <!-- Lucide icons for modern SVG icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+  <script>
+    // Base do WhatsApp
+    const WHATS_BASE = 'https://wa.me/554792405689?text=';
+
+    // Mesma lista de produtos do index
+    const PRODUCTS = {
+      doces: [
+        { id:'bolo-1kg', title:'Bolo Caseiro 1kg', price:49, img:'https://picsum.photos/seed/bolo/640/400',
+          desc:'Massa fofinha, recheio cremoso e cobertura caprichada.', tags:['Popular','Artesanal'] },
+        { id:'brigadeiro-gourmet', title:'Brigadeiro (cx 12)', price:28, img:'https://picsum.photos/seed/brigadeiro/640/400',
+          desc:'Tradicionais e gourmet com coberturas especiais.', tags:['Gourmet'] },
+        { id:'cupcake', title:'Cupcakes', price:6, unit:true, img:'https://picsum.photos/seed/cupcake/640/400',
+          desc:'Sabores variados e decoração personalizada.' }
+      ],
+      salgados: [
+        { id:'coxinha-25', title:'Coxinha (25 un)', price:39, img:'https://picsum.photos/seed/coxinha/640/400',
+          desc:'Massa leve, frango temperado e crocância perfeita.' },
+        { id:'quiche', title:'Quiche Individual', price:12, unit:true, img:'https://picsum.photos/seed/quiche/640/400',
+          desc:'Clássica com queijo e alho-poró.' },
+        { id:'empada-12', title:'Empadas (12 un)', price:35, img:'https://picsum.photos/seed/empada/640/400',
+          desc:'Massa amanteigada e recheios variados.' }
+      ],
+      bebidas: [
+        { id:'coca-lata', title:'Refrigerante Lata', price:6, unit:true, img:'https://picsum.photos/seed/refri/640/400',
+          desc:'Geladinha pra acompanhar.', size:'350ml' },
+        { id:'agua', title:'Água', price:4, unit:true, img:'https://picsum.photos/seed/agua/640/400',
+          desc:'Sem gás', size:'500ml' },
+        { id:'suco', title:'Suco Natural', price:10, unit:true, img:'https://picsum.photos/seed/suco/640/400',
+          desc:'Laranja espremida na hora.', size:'300ml' }
+      ]
+    };
+
+    function buildWhats(p){
+      const msg = encodeURIComponent(`Olá! Quero pedir: ${p.title} (${p.id}). Qual a disponibilidade para hoje?`);
+      return WHATS_BASE + msg;
+    }
+
+    function suggestCombos(cat,id){
+      if(cat !== 'bebidas') return PRODUCTS.bebidas.slice(0,2).map(x=>({...x, cat:'bebidas'}));
+      return PRODUCTS.doces.slice(0,2).map(x=>({...x, cat:'doces'}));
+    }
+
+    function parseParams(){
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('categoria') || params.get('cat') || 'doces';
+      const id  = params.get('id');
+      return {cat,id};
+    }
+
+    function renderProduct(){
+      const {cat, id} = parseParams();
+      const category = PRODUCTS[cat] || PRODUCTS.doces;
+      let product = null;
+      if(id){ product = category.find(x=>x.id === id); }
+      if(!product){ product = category[0]; }
+      // Render principal
+      document.getElementById('product-img').src = product.img;
+      document.getElementById('product-img').alt = product.title;
+      document.getElementById('product-title').textContent = product.title;
+      document.getElementById('product-desc').textContent = product.desc;
+      document.getElementById('product-price').textContent = `a partir de R$ ${product.price}${product.unit?',00/unid':''}`;
+      const orderLink = buildWhats(product);
+      document.getElementById('product-order').href = orderLink;
+      document.getElementById('fab').href = orderLink;
+      // combos
+      const combos = suggestCombos(cat, product.id);
+      const carousel = document.getElementById('combos-carousel');
+      carousel.innerHTML = combos.map(c=>`
+        <div class="item">
+          <img src="${c.img}" alt="${c.title}">
+          <div class="title">${c.title}</div>
+          <div class="actions">
+            <a class="btn btn-secondary" href="product.html?categoria=${c.cat}&id=${c.id}">Ver</a>
+            <a class="btn btn-primary" href="${buildWhats(c)}" target="_blank">Pedir</a>
+          </div>
+        </div>
+      `).join('');
+      if(combos.length){
+        document.getElementById('combos-section').style.display = 'block';
+      }
+      // Botão adicionar combo
+      document.getElementById('add-combo').onclick = function(e){
+        e.preventDefault();
+        const extra = combos[0];
+        const msg = encodeURIComponent(`Quero 1x ${product.title} + 1x ${extra.title}. Pode enviar o valor?`);
+        window.open(WHATS_BASE + msg,'_blank');
+      };
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProduct();
+      // Microanimações com Motion
+      if(window.motion){
+        const {animate, scroll} = motion;
+        animate('.product-img img', {opacity:[0,1], scale:[0.95,1]}, {duration:0.6});
+        animate('.product-info', {opacity:[0,1], y:[20,0]}, {duration:0.6, delay:0.1});
+        animate('.carousel .item', {opacity:[0,1], y:[10,0]}, {delay: scroll(({y})=>y.progress*0.3)});
+      }
+
+      // Render Lucide icons when library is available
+      if(window.lucide){
+        window.lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
