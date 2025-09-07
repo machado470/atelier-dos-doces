@@ -432,7 +432,7 @@
 
     <!-- Faixa deslizável -->
     <div id="menu-carousel"
-         class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-1 py-1 scroll-px-10 rounded-[var(--radius)]"
+         class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-1 py-1 scroll-px-10 rounded-[var(--radius)] focus:outline-none"
          style="scrollbar-width:none;">
       <style>#menu-carousel::-webkit-scrollbar{display:none}</style>
 
@@ -443,7 +443,7 @@
       <!-- Bolo -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden relative">
         <span class="absolute top-2 left-2 bg-rose-300 text-rose-900 text-[11px] font-semibold px-2 py-0.5 rounded-full">Favoritinho</span>
-        <img src="bolocaseiro.png" alt="Bolo caseiro 1kg" class="w-full h-36 object-cover">
+        <img src="bolocaseiro.png" alt="Bolo caseiro 1kg" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Bolo caseiro 1kg</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Massa fofinha com cobertura.</p>
@@ -455,7 +455,7 @@
       <!-- Cupcakes -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden relative">
         <span class="absolute top-2 right-2 bg-rose-300 text-rose-900 text-[11px] font-semibold px-2 py-0.5 rounded-full">Novo</span>
-        <img src="cupcakes.png" alt="Cupcakes" class="w-full h-36 object-cover">
+        <img src="cupcakes.png" alt="Cupcakes" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Cupcakes</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Sabores variados.</p>
@@ -466,7 +466,7 @@
 
       <!-- Brigadeiros -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden">
-        <img src="brigadeiros.png" alt="Brigadeiros (cx 12)" class="w-full h-36 object-cover">
+        <img src="brigadeiros.png" alt="Brigadeiros (cx 12)" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Brigadeiros (cx 12)</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Tradicionais e gourmet.</p>
@@ -477,7 +477,7 @@
 
       <!-- Coxinha -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden">
-        <img src="coxinha.png" alt="Coxinha (25 un)" class="w-full h-36 object-cover">
+        <img src="coxinha.png" alt="Coxinha (25 un)" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Coxinha (25 un)</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Massa leve e crocante.</p>
@@ -488,7 +488,7 @@
 
       <!-- Quiche -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden">
-        <img src="quiche.png" alt="Quiche individual" class="w-full h-36 object-cover">
+        <img src="quiche.png" alt="Quiche individual" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Quiche Individual</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Queijo e alho-poró.</p>
@@ -499,7 +499,7 @@
 
       <!-- Empadas -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden">
-        <img src="empadas.png" alt="Empadas (12 un)" class="w-full h-36 object-cover">
+        <img src="empadas.png" alt="Empadas (12 un)" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Empadas (12 un)</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Massa amanteigada e recheios.</p>
@@ -510,7 +510,7 @@
 
       <!-- Refrigerante -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden">
-        <img src="refrigerante.png" alt="Refrigerante (lata)" class="w-full h-36 object-cover">
+        <img src="refrigerante.png" alt="Refrigerante (lata)" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Refrigerante (lata)</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Bem gelado.</p>
@@ -521,7 +521,7 @@
 
       <!-- Água -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden">
-        <img src="agua.png" alt="Água sem gás" class="w-full h-36 object-cover">
+        <img src="agua.png" alt="Água sem gás" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Água</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Sem gás.</p>
@@ -532,7 +532,7 @@
 
       <!-- Suco -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden">
-        <img src="suco.png" alt="Suco natural de laranja" class="w-full h-36 object-cover">
+        <img src="suco.png" alt="Suco natural de laranja" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Suco Natural</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Laranja espremida na hora.</p>
@@ -544,7 +544,7 @@
       <!-- Picadão -->
       <article class="menu-card card min-w-[240px] max-w-[240px] h-[340px] flex-shrink-0 snap-center flex flex-col overflow-hidden relative">
         <span class="absolute top-2 right-2 bg-rose-300 text-rose-900 text-[11px] font-semibold px-2 py-0.5 rounded-full">Mais pedido</span>
-        <img src="picadao.png" alt="Picadão Gourmet" class="w-full h-36 object-cover">
+        <img src="picadao.png" alt="Picadão Gourmet" class="w-full h-36 object-cover" loading="lazy" decoding="async">
         <div class="p-3 flex flex-col flex-1">
           <h3 class="font-bold text-lg leading-snug mb-1">Picadão Gourmet</h3>
           <p class="text-sm text-gray-600 mb-2 flex-1">Prato completo: carnes, arroz e fritas.</p>
@@ -560,22 +560,19 @@
 </section>
 
 <script>
-  // Seta única que alterna lado/direção ao atingir as extremidades
-  (function(){
+  // Seta única: alterna lado/direção; oculta quando não há rolagem; teclado e wheel horizontais
+  (function () {
     const wrap  = document.getElementById('menu-carousel');
     const arrow = document.getElementById('menu-arrow');
 
-    // posiciona a seta
     function place(side){
-      // limpa lados
-      arrow.style.left  = '';
-      arrow.style.right = '';
-      if(side === 'left'){
-        arrow.style.left  = '-2rem'; // ~ -left-8
+      arrow.style.left = arrow.style.right = '';
+      if (side === 'left') {
+        arrow.style.left  = '-2rem';  // ~ -left-8
         arrow.textContent = '‹';
         arrow.setAttribute('aria-label','Anterior');
-      }else{
-        arrow.style.right = '-2rem'; // ~ -right-8
+      } else {
+        arrow.style.right = '-2rem';  // ~ -right-8
         arrow.textContent = '›';
         arrow.setAttribute('aria-label','Próximo');
       }
@@ -587,32 +584,43 @@
       const gap = 16; // gap-4
       return cardW + gap;
     }
-
-    function nearStart(){
-      return wrap.scrollLeft <= 2; // tolerância
-    }
-    function nearEnd(){
-      const max = wrap.scrollWidth - wrap.clientWidth - 2;
-      return wrap.scrollLeft >= max;
-    }
+    function maxScroll(){ return Math.max(0, wrap.scrollWidth - wrap.clientWidth); }
+    function nearStart(){ return wrap.scrollLeft <= 2; }
+    function nearEnd(){   return wrap.scrollLeft >= maxScroll() - 2; }
 
     function updateArrow(){
-      if(nearEnd())      place('left');   // chegou no fim → seta vai pra esquerda e aponta pra voltar
-      else               place('right');  // caso contrário → seta à direita, aponta pra avançar
+      const canScroll = wrap.scrollWidth > wrap.clientWidth + 4;
+      arrow.style.display = canScroll ? '' : 'none';
+      if (nearEnd()) place('left'); else place('right');
     }
 
-    function go(){
-      // decide direção pelo lado atual
-      const dir = arrow.textContent === '›' ? 1 : -1;
-      wrap.scrollBy({ left: dir * step(), behavior: 'smooth' });
+    function goBy(delta){
+      const target = Math.min(maxScroll(), Math.max(0, wrap.scrollLeft + delta));
+      wrap.scrollTo({ left: target, behavior: 'smooth' });
     }
+    function go(){ goBy(arrow.textContent === '›' ? +step() : -step()); }
 
     // eventos
     arrow.addEventListener('click', go);
     wrap.addEventListener('scroll', updateArrow, { passive: true });
     window.addEventListener('resize', updateArrow);
 
-    // início
+    // teclado (desktop)
+    wrap.tabIndex = 0;
+    wrap.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); goBy(+step()); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); goBy(-step()); }
+    });
+
+    // roda do mouse -> scroll horizontal
+    wrap.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        goBy(e.deltaY > 0 ? +step() : -step());
+      }
+    }, { passive: false });
+
+    // inicial
     updateArrow();
   })();
 </script>
